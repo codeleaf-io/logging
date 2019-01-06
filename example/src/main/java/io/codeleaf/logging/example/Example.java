@@ -1,11 +1,11 @@
 package io.codeleaf.logging.example;
 
-import io.codeleaf.logging.core.LoggingBindings;
+import io.codeleaf.logging.core.LogBindings;
 
 public final class Example {
 
     public static void main(String[] args) {
-        LoggingBindings.init();
+        LogBindings.init();
         System.out.println("Hello INFO!");
         System.err.println("Hello ERROR!");
     }

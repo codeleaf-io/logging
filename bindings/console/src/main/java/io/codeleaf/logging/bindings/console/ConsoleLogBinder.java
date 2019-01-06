@@ -6,20 +6,31 @@ import io.codeleaf.logging.spi.LogListener;
 
 import java.io.PrintStream;
 
+/**
+ * Provides the <code>LogBinder</code> to the console.
+ *
+ * @author tvburger@gmail.com
+ * @see System#out
+ * @see System#err
+ * @since 0.1.0
+ */
 public final class ConsoleLogBinder implements LogBinder {
 
     private boolean bound = false;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void bind(LogListener listener) {
-        if (isBound()) {
-            throw new IllegalStateException("Already bound!");
-        }
-        System.setOut(new PrintStream(new LogOutputStream(listener, "stdout", LogLevel.INFO), true));
-        System.setErr(new PrintStream(new LogOutputStream(listener, "stderr", LogLevel.ERROR), true));
+        System.setOut(new PrintStream(LogOutputStream.create(listener, "stdout", LogLevel.INFO), true));
+        System.setErr(new PrintStream(LogOutputStream.create(listener, "stderr", LogLevel.ERROR), true));
         bound = true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isBound() {
         return bound;

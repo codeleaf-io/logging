@@ -26,7 +26,6 @@
         <module>bindings/console</module>
         <module>writers/console</module>
         <module>writers/elastic</module>
-        <module>example</module>
     </modules>
 
     <licenses>
@@ -81,6 +80,12 @@
     </distributionManagement>
 
     <profiles>
+        <profile>
+            <id>example</id>
+            <modules>
+                <module>example</module>
+            </modules>
+        </profile>
         <profile>
             <id>release</id>
             <build>

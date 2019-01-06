@@ -7,7 +7,7 @@ import org.elasticsearch.common.transport.TransportAddress;
 
 import java.net.InetAddress;
 
-public final class ElsaticLogConfigurationFactory extends AbstractConfigurationFactory<ElasticLogConfiguration> {
+public final class ElasticLogConfigurationFactory extends AbstractConfigurationFactory<ElasticLogConfiguration> {
 
     private static final ElasticLogConfiguration defaultConfiguration = new ElasticLogConfiguration(
             "docker-cluster",
@@ -16,7 +16,7 @@ public final class ElsaticLogConfigurationFactory extends AbstractConfigurationF
             "logs",
             true);
 
-    public ElsaticLogConfigurationFactory() {
+    public ElasticLogConfigurationFactory() {
         super(defaultConfiguration);
     }
 

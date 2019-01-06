@@ -11,7 +11,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ServiceLoader;
 
-public final class LoggingBindings {
+/**
+ * Enables the logging system.
+ *
+ * @author tvburger@gmail.com
+ * @since 0.1.0
+ */
+public final class LogBindings {
 
     private static final PrintStream out = System.out;
     private static final PrintStream err = System.err;
@@ -39,21 +45,34 @@ public final class LoggingBindings {
         }
     };
 
+    /**
+     * Initializes the logging system.
+     */
     public static void init() {
-        LoggingBindings bindings = new LoggingBindings();
+        LogBindings bindings = new LogBindings();
         bindings.loadWriters();
         bindings.loadBindings();
     }
 
+    /**
+     * Returns the {@link System#out} before the logging system was initialized.
+     *
+     * @return the {@link System#out} before the logging system was initialized
+     */
     public static PrintStream getOriginalOut() {
         return out;
     }
 
+    /**
+     * Returns the {@link System#err} before the logging system was initialized.
+     *
+     * @return the {@link System#err} before the logging system was initialized
+     */
     public static PrintStream getOriginalErr() {
         return err;
     }
 
-    private LoggingBindings() {
+    private LogBindings() {
     }
 
     private void loadWriters() {
