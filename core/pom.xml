@@ -1,0 +1,28 @@
+<project>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>io.codeleaf.logging</groupId>
+        <artifactId>logging</artifactId>
+        <version>0.1.0</version>
+    </parent>
+
+    <artifactId>logging-core</artifactId>
+
+    <name>Logging :: Core</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>logging-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.codeleaf.common</groupId>
+            <artifactId>common-utils</artifactId>
+            <version>${leaf-common.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>
