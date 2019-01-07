@@ -7,6 +7,7 @@ import io.codeleaf.logging.LoggingException;
  * Interface for providing a new log writer.
  *
  * @author tvburger@gmail.com
+ * @see LogWriterProvider
  * @since 0.1.0
  */
 public interface LogWriter {

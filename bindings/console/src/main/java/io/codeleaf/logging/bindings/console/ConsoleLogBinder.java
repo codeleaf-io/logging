@@ -1,8 +1,7 @@
 package io.codeleaf.logging.bindings.console;
 
 import io.codeleaf.logging.LogLevel;
-import io.codeleaf.logging.spi.LogBinder;
-import io.codeleaf.logging.spi.LogListener;
+import io.codeleaf.logging.ext.LogBinder;
 
 import java.io.PrintStream;
 
@@ -22,7 +21,7 @@ public final class ConsoleLogBinder implements LogBinder {
      * {@inheritDoc}
      */
     @Override
-    public void bind(LogListener listener) {
+    public void bind(Listener listener) {
         System.setOut(new PrintStream(LogOutputStream.create(listener, "stdout", LogLevel.INFO), true));
         System.setErr(new PrintStream(LogOutputStream.create(listener, "stderr", LogLevel.ERROR), true));
         bound = true;

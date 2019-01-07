@@ -40,6 +40,22 @@ public final class LogInvocation {
     }
 
     /**
+     * Creates a new instance. The source is determined by the first <code>StackTraceElement</code> which class name
+     * does not start with <code>java.</code>, <code>sun.</code>, or <code>io.codeleaf.logging.</code>.
+     *
+     * @param logName        the name of the logger
+     * @param message        the message to log
+     * @param logLevel       the log level to use
+     * @param invocationTime invocation time, the format as provided by {@link System#currentTimeMillis()}
+     * @return a new instance
+     * @throws NullPointerException if <code>logName</code>, <code>message</code>, or <code>logLevel</code> is <code>null</code>
+     * @see Thread#getStackTrace()
+     */
+    public static LogInvocation create(String logName, String message, LogLevel logLevel, long invocationTime) {
+        return create(logName, message, logLevel, invocationTime, determineSource());
+    }
+
+    /**
      * Creates a new instance. The invocation time is retrieved using <code>System.currentTimeMillis</code>.
      *
      * @param logName  the name of the logger

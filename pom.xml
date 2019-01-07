@@ -24,6 +24,7 @@
         <module>api</module>
         <module>core</module>
         <module>bindings/console</module>
+        <module>bindings/slf4j</module>
         <module>writers/console</module>
         <module>writers/elastic</module>
     </modules>

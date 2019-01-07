@@ -2,7 +2,7 @@ package io.codeleaf.logging.bindings.console;
 
 import io.codeleaf.logging.LogInvocation;
 import io.codeleaf.logging.LogLevel;
-import io.codeleaf.logging.spi.LogListener;
+import io.codeleaf.logging.ext.LogBinder;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -10,7 +10,7 @@ import java.io.OutputStream;
 import java.util.Objects;
 
 /**
- * Implements an <code>OutputStream</code> that forwards the messages to a <code>LogListener</code>.
+ * Implements an <code>OutputStream</code> that forwards the messages to a <code>Listener</code>.
  *
  * @author tvburger@gmail.com
  * @since 0.1.0
@@ -26,7 +26,7 @@ public final class LogOutputStream extends OutputStream {
      * @return a new instance
      * @throws NullPointerException if <code>listener</code>, <code>logName</code>, or <code>logLevel</code> is null.
      */
-    public static LogOutputStream create(LogListener listener, String logName, LogLevel logLevel) {
+    public static LogOutputStream create(LogBinder.Listener listener, String logName, LogLevel logLevel) {
         Objects.requireNonNull(listener);
         Objects.requireNonNull(logName);
         Objects.requireNonNull(logLevel);
@@ -35,11 +35,11 @@ public final class LogOutputStream extends OutputStream {
 
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
-    private final LogListener listener;
+    private final LogBinder.Listener listener;
     private final String logName;
     private final LogLevel logLevel;
 
-    private LogOutputStream(LogListener listener, String logName, LogLevel logLevel) {
+    private LogOutputStream(LogBinder.Listener listener, String logName, LogLevel logLevel) {
         this.listener = listener;
         this.logName = logName;
         this.logLevel = logLevel;

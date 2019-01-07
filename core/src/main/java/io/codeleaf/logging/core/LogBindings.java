@@ -1,8 +1,7 @@
 package io.codeleaf.logging.core;
 
 import io.codeleaf.logging.LoggingException;
-import io.codeleaf.logging.spi.LogBinder;
-import io.codeleaf.logging.spi.LogListener;
+import io.codeleaf.logging.ext.LogBinder;
 import io.codeleaf.logging.spi.LogWriter;
 import io.codeleaf.logging.spi.LogWriterProvider;
 
@@ -24,7 +23,7 @@ public final class LogBindings {
 
     private final Map<LogWriterProvider, Map<String, LogWriter>> providers = new HashMap<>();
 
-    private final LogListener listener = invocation -> {
+    private final LogBinder.Listener listener = invocation -> {
         for (Map.Entry<LogWriterProvider, Map<String, LogWriter>> entry : providers.entrySet()) {
             try {
                 Map<String, LogWriter> writers = entry.getValue();
@@ -91,7 +90,7 @@ public final class LogBindings {
                 logBinder.bind(listener);
                 out.println("Bound " + logBinder.getClass().getName());
             } catch (LoggingException cause) {
-                err.println("Failed to bind " + logBinder.getClass().getName() + ": " + cause.getCause());
+                err.println("Failed to bind " + logBinder.getClass().getName() + ": " + cause.getMessage());
             }
         }
     }
