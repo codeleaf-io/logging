@@ -39,6 +39,11 @@
             <artifactId>logging-writer-console</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>logging-writer-elastic</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
 </project>
