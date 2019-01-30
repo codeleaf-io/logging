@@ -19,11 +19,13 @@
 
     <modules>
         <module>api</module>
+        <module>slf4j</module>
         <module>core</module>
         <module>bindings/console</module>
         <module>bindings/slf4j</module>
         <module>writers/console</module>
         <module>writers/elastic</module>
+        <module>example</module>
     </modules>
 
     <developers>

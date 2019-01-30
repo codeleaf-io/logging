@@ -6,8 +6,11 @@ import org.slf4j.LoggerFactory;
 
 public final class Example {
 
-    public static void main(String[] args) {
+    static {
         LogBindings.init();
+    }
+
+    public static void main(String[] args) {
         System.out.println("Hello INFO!");
         System.err.println("Hello ERROR!");
 
