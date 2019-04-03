@@ -13,10 +13,6 @@
 
     <name>Logging :: Bindings :: SLF4J</name>
 
-    <properties>
-        <slf4j.version>1.7.25</slf4j.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -24,10 +20,9 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-            <scope>provided</scope>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>logging-slf4j</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 
