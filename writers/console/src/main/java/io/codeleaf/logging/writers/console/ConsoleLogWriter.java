@@ -66,12 +66,13 @@ public final class ConsoleLogWriter implements LogWriter {
     }
 
     private String format(LogInvocation invocation) {
-        return String.format("%s [%s] <%s> %s@%s: %s",
+        return String.format("%s [%s] <%s> %s@%s %s: %s",
                 new Date(invocation.getInvocationTime()),
                 invocation.getLogLevel().name(),
                 invocation.getLogName(),
                 invocation.getSource().getFileName(),
                 invocation.getSource().getLineNumber(),
+                invocation.getThreadName(),
                 invocation.getMessage());
     }
 

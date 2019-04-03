@@ -1,5 +1,7 @@
 package io.codeleaf.logging;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Objects;
 
 /**
@@ -86,7 +88,38 @@ public final class LogInvocation {
         Objects.requireNonNull(message);
         Objects.requireNonNull(logLevel);
         Objects.requireNonNull(source);
-        return new LogInvocation(logName, message, logLevel, invocationTime, source);
+        String hostName;
+        try {
+            hostName = InetAddress.getLocalHost().getCanonicalHostName();
+        } catch (UnknownHostException cause) {
+            hostName = "unknown";
+        }
+        String threadName = String.format("%s [%s-%s]",
+                Thread.currentThread().getName(), Thread.currentThread().getThreadGroup(), Thread.currentThread().getId());
+        return new LogInvocation(logName, message, logLevel, invocationTime, source, hostName, threadName);
+    }
+
+    /**
+     * Creates a new instance.
+     *
+     * @param logName        the name of the logger
+     * @param message        the message to log
+     * @param logLevel       the log level to use
+     * @param invocationTime invocation time, the format as provided by {@link System#currentTimeMillis()}
+     * @param source         the source of the invocation
+     * @param hostName       the name of the host that is logging
+     * @param threadName     the name of the thread that is logging
+     * @return a new instance
+     * @throws NullPointerException if <code>logName</code>, <code>message</code>, <code>logLevel</code>, or <code>source</code> is <code>null</code>
+     */
+    public static LogInvocation create(String logName, String message, LogLevel logLevel, long invocationTime, StackTraceElement source, String hostName, String threadName) {
+        Objects.requireNonNull(logName);
+        Objects.requireNonNull(message);
+        Objects.requireNonNull(logLevel);
+        Objects.requireNonNull(source);
+        Objects.requireNonNull(hostName);
+        Objects.requireNonNull(threadName);
+        return new LogInvocation(logName, message, logLevel, invocationTime, source, hostName, threadName);
     }
 
     private final String logName;
@@ -94,13 +127,17 @@ public final class LogInvocation {
     private final LogLevel logLevel;
     private final long invocationTime;
     private final StackTraceElement source;
+    private final String hostName;
+    private final String threadName;
 
-    private LogInvocation(String logName, String message, LogLevel logLevel, long invocationTime, StackTraceElement source) {
+    private LogInvocation(String logName, String message, LogLevel logLevel, long invocationTime, StackTraceElement source, String hostName, String threadName) {
         this.logName = logName;
         this.message = message;
         this.logLevel = logLevel;
         this.invocationTime = invocationTime;
         this.source = source;
+        this.hostName = hostName;
+        this.threadName = threadName;
     }
 
     /**
@@ -148,4 +185,20 @@ public final class LogInvocation {
         return source;
     }
 
+    /**
+     * Returns the host name from where the log was written
+     *
+     * @return the host name from where the log was written
+     */
+    public String getHostName() {
+        return hostName;
+    }
+
+    /**
+     * Returns the thread name from where the log was written
+     * @returnm the thread name from where the log was written
+     */
+    public String getThreadName() {
+        return threadName;
+    }
 }
