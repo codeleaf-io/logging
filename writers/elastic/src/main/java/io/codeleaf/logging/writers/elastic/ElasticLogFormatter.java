@@ -30,6 +30,8 @@ public final class ElasticLogFormatter {
                 "log_time", timestamp(),
                 "log_level", keyword(),
                 "source", getSourceMapping(),
+                "host_name", text(),
+                "thread_name", text(),
                 "message", text());
     }
 
@@ -39,6 +41,8 @@ public final class ElasticLogFormatter {
         map.put("log_time", invocation.getInvocationTime());
         map.put("log_level", invocation.getLogLevel().name());
         map.put("source", createSourceMap(invocation.getSource()));
+        map.put("host_name", invocation.getHostName());
+        map.put("thread_name", invocation.getThreadName());
         map.put("message", invocation.getMessage());
         return map;
     }
