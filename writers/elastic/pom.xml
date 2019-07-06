@@ -14,7 +14,7 @@
     <name>Logging :: Writers :: Elasticsearch</name>
 
     <properties>
-        <elastic.version>6.5.4</elastic.version>
+        <elastic.version>7.2.0</elastic.version>
     </properties>
 
     <dependencies>
