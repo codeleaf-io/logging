@@ -17,12 +17,10 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>logging-api</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>logging-slf4j</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 
