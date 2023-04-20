@@ -1,38 +1,28 @@
 package io.codeleaf.logging.writers.elastic;
 
+import co.elastic.clients.elasticsearch._types.mapping.TypeMapping;
 import io.codeleaf.logging.LogInvocation;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static io.codeleaf.logging.writers.elastic.utils.ElasticMappings.*;
-
 public final class ElasticLogFormatter {
 
-    public static final String FORMAT_VERSION = "1";
-
-    public String getFormatVersion() {
-        return FORMAT_VERSION;
-    }
-
-    private Map<String, Object> getSourceMapping() {
-        return object("class_name", keyword(),
-                "class_name_package", keyword(),
-                "class_name_short", keyword(),
-                "file_name", keyword(),
-                "line_nr", number(),
-                "method_name", keyword());
-    }
-
-    public Map<String, Object> getMapping() {
-        return object(
-                "logger", keyword(),
-                "log_time", timestamp(),
-                "log_level", keyword(),
-                "source", getSourceMapping(),
-                "host_name", text(),
-                "thread_name", text(),
-                "message", text());
+    public TypeMapping getMapping() {
+        return TypeMapping.of(b -> b
+                .properties("logger", p -> p.keyword(q -> q.index(true)))
+                .properties("log_time", p -> p.date(q -> q.format("epoch_millis").index(true)))
+                .properties("log_level", p -> p.keyword(q -> q.index(true)))
+                .properties("source", p -> p.object(q -> q
+                        .properties("class_name", r -> r.keyword(s -> s.index(true)))
+                        .properties("class_name_package", r -> r.keyword(s -> s.index(true)))
+                        .properties("class_name_short", r -> r.keyword(s -> s.index(true)))
+                        .properties("file_name", r -> r.keyword(s -> s.index(true)))
+                        .properties("line_nr", r -> r.integer(s -> s.index(true)))
+                        .properties("method_name", r -> r.keyword(s -> s.index(true)))))
+                .properties("host_name", p -> p.text(q -> q.index(true)))
+                .properties("thread_name", p -> p.text(q -> q.index(true)))
+                .properties("message", p -> p.text(q -> q.index(true))));
     }
 
     public Map<String, Object> formatLog(LogInvocation invocation, String loggerName) {

@@ -3,7 +3,7 @@ version: '3.3'
 services:
 
   elastic:
-    image: elasticsearch:7.2.0
+    image: elasticsearch:8.7.0
     hostname: elastic
     expose:
       - "9200"
@@ -15,7 +15,7 @@ services:
       - discovery.type=single-node
 
   kibana:
-    image: kibana:7.2.0
+    image: kibana:8.7.0
     hostname: kibana
     depends_on:
       - elastic

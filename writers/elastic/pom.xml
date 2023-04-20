@@ -5,17 +5,13 @@
     <parent>
         <groupId>io.codeleaf.logging</groupId>
         <artifactId>logging</artifactId>
-        <version>0.1.0</version>
-        <relativePath>../..</relativePath>
+        <version>0.9.0</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
 
     <artifactId>logging-writer-elastic</artifactId>
 
     <name>Logging :: Writers :: Elasticsearch</name>
-
-    <properties>
-        <elastic.version>7.2.0</elastic.version>
-    </properties>
 
     <dependencies>
         <dependency>
@@ -28,9 +24,9 @@
             <version>${leaf-config.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.elasticsearch.client</groupId>
-            <artifactId>transport</artifactId>
-            <version>${elastic.version}</version>
+            <groupId>io.codeleaf.common</groupId>
+            <artifactId>common-libs-elastic</artifactId>
+            <version>${leaf-common.version}</version>
         </dependency>
     </dependencies>
 
